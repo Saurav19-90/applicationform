@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Application Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
+
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    label,
+    input,
+    select,
+    textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    input[type="file"] {
+      padding: 5px;
+    }
+
+    button {
+      padding: 10px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+    .error {
+        color: red;
+        font-size: 0.9em;
+        margin-top: -12px;
+        margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">165 INF BN (TA) (H&H) ASSAM</h2>
+  <h2 style="text-align: center;">RECRUITMENT APPLICATION FORM</h2>
+  <h3>Fill all the details very carefully and submit only 1 form per candidate.</h3>
+
+  <form action="/submit" method="POST" enctype="multipart/form-data">
+    <!-- Personal Details -->
+    <label for="name">Your Name *</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="father_name">Your Father's Name *</label>
+    <input type="text" id="father_name" name="father_name" required />
+
+    <!-- Documents Upload -->
+    <label for="photo">Passport Size Photograph *</label>
+    <input type="file" id="photo" name="photo" accept="image/*" required />
+
+    <label for="aadhar_front">Aadhaar Front Side *</label>
+    <input type="file" id="aadhar_front" name="aadhar_front" accept="image/*" required />
+
+    <label for="aadhar_back">Aadhaar Back Side *</label>
+    <input type="file" id="aadhar_back" name="aadhar_back" accept="image/*" required />
+
+    <label for="aadhar_number">Aadhaar Number (12 digits) *</label>
+    <input
+      type="text"
+      id="aadhar_number"
+      name="aadhar_number"
+      pattern="\d{12}"
+      maxlength="12"
+      required
+      title="Enter exactly 12 digits"
+    />
+
+    <!-- Address -->
+    <label for="address">Permanent Address *</label>
+    <textarea id="address" name="address" rows="3" required></textarea>
+
+    <label for="district">Domicile District *</label>
+    <select id="district" name="district" required>
+      <option value="">--Select--</option>
+      <option>IMPHAL EAST</option>
+      <option>IMPHAL WEST</option>
+      <option>THOUBAL</option>
+      <option>BISHNUPUR</option>
+      <option>CHANDEL</option>
+      <option>CHURACHANDPUR</option>
+      <option>KAKCHING</option>
+      <option>KANGPOKPI</option>
+      <option>KAMJONG</option>
+      <option>NONEY</option>
+      <option>PHERZAWL</option>
+      <option>SENAPATI</option>
+      <option>TAMENGLONG</option>
+      <option>TENGNOUPAL</option>
+      <option>UKHRUL</option>
+      <option>JIRIBAM</option>
+      <option>ALL INDIA BASIS FOR TRADESMAN ONLY</option>
+    </select>
+
+    <label for="location">Choice of Recruitment Location *</label>
+    <select id="location" name="location" required>
+      <option value="">--Select--</option>
+      <option>NONEY</option>
+      <option>CHURACHANDPUR</option>
+      <option>IMPHAL</option>
+      <option>IMPHAL (ALL INDIA BASIS FOR TRADESMAN ONLY)</option>
+    </select>
+
+<div class="dob-label">
+      <label for="dob">DATE OF BIRTH (dd/mm/yyyy) *</label>
+      <span id="dobError" class="error"></span>
+    </div>
+    <input type="text" name="dob" id="dob" placeholder="dd/mm/yyyy" pattern="\d{2}/\d{2}/\d{4}" required>
+
+    <!-- Community -->
+    <label for="community">Your Community *</label>
+    <select id="community" name="community" required>
+      <option value="">--Select--</option>
+      <option>NAGA</option>
+      <option>MUSLIM</option>
+      <option>KUKI</option>
+      <option>MEITEI</option>
+      <option>OTHERS</option>
+    </select>
+
+    <!-- Post -->
+    <label for="post">Vacancy Applying For *</label>
+    <select id="post" name="post" required>
+      <option value="">--Select--</option>
+      <option>SOLDIER GENERAL DUTY</option>
+      <option>CHEF</option>
+      <option>WASHERMAN</option>
+      <option>HAIR DRESSER</option>
+      <option>TAILOR</option>
+      <option>ARTISAN WOOD WORK</option>
+      <option>EQUIPMENT REPAIR</option>
+    </select>
+
+    <!-- Qualification -->
+    <label for="qualification">Educational Qualification *</label>
+    <select id="qualification" name="qualification" required>
+      <option value="">--Select--</option>
+      <option>8th PASS</option>
+      <option>10th PASS</option>
+      <option>12th PASS</option>
+      <option>GRADUATION</option>
+      <option>POST GRADUATION</option>
+    </select>
+
+    <!-- Contact -->
+    <label for="email">Email ID *</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="mobile">Mobile Number *</label>
+    <input
+      type="tel"
+      id="mobile"
+      name="mobile"
+      pattern="\d{10}"
+      maxlength="10"
+      required
+      title="Enter 10 digit mobile number"
+    />
+
+    <button type="submit">Submit Application</button>
+  </form>
+<script>
+    function validateDOB() {
+      const dobInput = document.getElementById('dob').value;
+      const dobError = document.getElementById('dobError');
+      dobError.textContent = '';
+
+      const dobParts = dobInput.split('/');
+      if (dobParts.length !== 3) {
+        dobError.textContent = 'Invalid format';
+        return false;
+      }
+
+      const day = parseInt(dobParts[0], 10);
+      const month = parseInt(dobParts[1], 10) - 1;
+      const year = parseInt(dobParts[2], 10);
+      const dobDate = new Date(year, month, day);
+
+      const referenceDate = new Date(2025, 6, 10); // 10 July 2025
+      let age = referenceDate.getFullYear() - dobDate.getFullYear();
+      const m = referenceDate.getMonth() - dobDate.getMonth();
+      if (m < 0 || (m === 0 && referenceDate.getDate() < dobDate.getDate())) {
+        age--;
+      }
+
+      if (age < 18 || age > 42) {
+        dobError.textContent = 'Age criteria failed';
+        return false;
+      }
+
+      return true;
+    }
+
+    document.getElementById('dob').addEventListener('blur', validateDOB);
+
+    document.getElementById('applicationForm').addEventListener('submit', function (e) {
+      if (!validateDOB()) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
+</body>
+</html>
